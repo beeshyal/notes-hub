@@ -1,5 +1,10 @@
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
 import { NoteDocument, NoteDocumentInput, Faculty } from "@/types/document";
+
+// Reads UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN, and falls back to
+// KV_REST_API_URL / KV_REST_API_TOKEN (what the Vercel Marketplace "Upstash
+// Redis" integration injects) automatically.
+const kv = Redis.fromEnv();
 
 const INDEX_KEY = "notes:index"; // sorted set, score = uploadedAt timestamp
 const docKey = (id: string) => `notes:doc:${id}`;

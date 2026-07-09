@@ -36,16 +36,16 @@ You need **two** OAuth clients in the [Google Cloud Console](https://console.clo
 4. Create a folder in your Drive for notes, copy its ID from the URL
    (`https://drive.google.com/drive/folders/<THIS_PART>`) into `DRIVE_FOLDER_ID`.
 
-## 2. Vercel KV
+## 2. Redis (document metadata) via Vercel Marketplace
 
-In your Vercel project → Storage → create a KV (Redis) database and connect
-it to this project. Vercel fills in `KV_URL`, `KV_REST_API_URL`,
-`KV_REST_API_TOKEN`, `KV_REST_API_READ_ONLY_TOKEN` automatically.
+Vercel KV was retired — storage now goes through the **Marketplace**:
 
-> Note: `@vercel/kv` is in maintenance mode; Vercel now recommends the
-> Upstash Redis integration under Marketplace. It still works today — if it's
-> ever removed, swap `lib/kv.ts` to use `@upstash/redis` directly, the API is
-> nearly identical.
+1. In your Vercel project → **Storage** tab → if you don't see a "Create Database" option there, go to **Integrations** or **Marketplace** from the main dashboard instead.
+2. Search for **Upstash** → **Upstash Redis** → Install.
+3. Either let Vercel manage an Upstash account for you, or connect an existing one — either is fine for this project.
+4. Create a Redis database, then connect it to the `notes-hub` project.
+5. This injects `KV_REST_API_URL` and `KV_REST_API_TOKEN` into your project automatically (the app reads these directly — no extra config needed).
+6. Redeploy after connecting so the new env vars take effect.
 
 ## 3. AdSense
 
@@ -117,5 +117,3 @@ components/
 - If you want open (non-admin) uploads later, add a pending/approved status
   field to `NoteDocument` and an approval queue, similar to your Campus
   registration system.
-# notes-hub
-# notes-hub
