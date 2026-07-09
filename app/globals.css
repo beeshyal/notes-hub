@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #14213D;
+  color: #F3ECD8;
+  font-family: "Inter", sans-serif;
+}
+
+::selection {
+  background-color: #A63A36;
+  color: #F3ECD8;
+}
+
+:focus-visible {
+  outline: 2px solid #A63A36;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.paper-texture {
+  background-image: radial-gradient(circle at 1px 1px, rgba(20, 33, 61, 0.06) 1px, transparent 0);
+  background-size: 14px 14px;
+}
