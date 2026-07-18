@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
-import Script from "next/script";
 
 const AD_WAIT_SECONDS = Number(process.env.NEXT_PUBLIC_AD_WAIT_SECONDS ?? 15);
 const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
@@ -66,7 +65,6 @@ export function AdUnlockGate({
       setMode("error");
     }
   }
-
   if (session?.user) {
     return (
       <button
@@ -101,27 +99,19 @@ export function AdUnlockGate({
       </div>
     );
   }
-
+  
   if (mode === "watching") {
     return (
       <div className="space-y-3 rounded-lg border border-parchment/15 bg-navy-light/40 p-5">
         {ADSENSE_CLIENT && ADSENSE_SLOT ? (
-          <>
-            <Script
-              async
-              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-              crossOrigin="anonymous"
-              strategy="afterInteractive"
-            />
-            <ins
-              className="adsbygoogle block min-h-[100px] bg-parchment/5"
-              style={{ display: "block" }}
-              data-ad-client={ADSENSE_CLIENT}
-              data-ad-slot={ADSENSE_SLOT}
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          </>
+          <ins
+            className="adsbygoogle block min-h-[100px] bg-parchment/5"
+            style={{ display: "block" }}
+            data-ad-client={ADSENSE_CLIENT}
+            data-ad-slot={ADSENSE_SLOT}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
         ) : (
           <div className="flex min-h-[100px] items-center justify-center rounded border border-dashed border-parchment/20 text-xs text-slate">
             Ad slot (set NEXT_PUBLIC_ADSENSE_CLIENT / _SLOT to go live)
