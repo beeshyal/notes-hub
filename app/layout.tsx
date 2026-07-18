@@ -16,16 +16,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {ADSENSE_CLIENT && (
-        <head>
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-            strategy="beforeInteractive"
-          />
-        </head>
-      )}
       <body className="flex min-h-screen flex-col font-body">
         <Providers>
           <Navbar />
@@ -33,6 +23,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </Providers>
       </body>
+      {ADSENSE_CLIENT && (
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      )}
     </html>
   );
 }
