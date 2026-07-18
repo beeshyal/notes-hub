@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export const metadata: Metadata = {
   title: "Notes Hub — BBS, BBA & MBA notes for Nepal",
@@ -13,6 +16,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      {ADSENSE_CLIENT && (
+        <head>
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        </head>
+      )}
       <body className="flex min-h-screen flex-col font-body">
         <Providers>
           <Navbar />
